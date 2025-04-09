@@ -1,17 +1,27 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-import CardMap from "../cardMap/CardMap"
-
+import { useState, useEffect } from 'react';
+import './App.css';
+import CardMap from "../cardMap/CardMap";
+import { getPrevisoes } from './AppAPI';
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  const allBus = ["64", "67", "3301A", "3301B", "3302A", "3302B", "3302D", "3502", "3503A", "4107", "5102", "8501"];
+  const [Linhas, setLinhas] = useState([]);
   const [indexBus, setIndexBus] = useState(0);
   const [progress, setProgress] = useState(0);
-  const duration = 7000; // 7 segundos
-  const updateInterval = 100; // Atualiza a barra a cada 100ms
+  const [CurrentBus, setCurrentBus] = useState(null);
 
+  const duration = 7000;
+  const updateInterval = 100;
+
+  useEffect(() => {
+    async function fetchPrevisoes() {
+      const dados = await getPrevisoes();
+      setLinhas(dados.previsoes || []);
+    }
+
+    fetchPrevisoes();
+  }, []);
+
+  // Atualiza progress e troca o ônibus
   useEffect(() => {
     const totalSteps = duration / updateInterval;
     let currentStep = 0;
@@ -21,37 +31,40 @@ function App() {
       setProgress((currentStep / totalSteps) * 100);
 
       if (currentStep >= totalSteps) {
-        setIndexBus(prev => (prev + 1) % allBus.length);
+        setIndexBus(prev => (prev + 1) % Linhas.length);
         currentStep = 0;
         setProgress(0);
       }
     }, updateInterval);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [Linhas]);
 
-  const currentBus = allBus[indexBus];
+  // Atualiza CurrentBus toda vez que indexBus muda
+  useEffect(() => {
+    if (Linhas.length > 0) {
+      setCurrentBus(Linhas[indexBus]);
+    }
+  }, [indexBus, Linhas]);
 
-
-
+  // Relógio
   const [dataHora, setDataHora] = useState(new Date());
 
   useEffect(() => {
     const interval = setInterval(() => {
       setDataHora(new Date());
-    }, 1000); // atualiza a cada 1 segundo
-
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
 
-  const date = dataHora.toLocaleDateString(); // formato: dd/mm/yyyy
-  const hour = dataHora.toLocaleTimeString(); // formato: hh:mm:ss
-  
+  const date = dataHora.toLocaleDateString();
+  const hour = dataHora.toLocaleTimeString();
+
   return (
     <>
-      <CardMap linha={currentBus} progress={progress} date={date} hour={hour}></CardMap>
+      <CardMap linha={CurrentBus?.sgLin} previsao={CurrentBus?.prev} progress={progress} date={date} hour={hour} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

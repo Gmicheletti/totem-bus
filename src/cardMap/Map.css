@@ -2,3 +2,9 @@
     height: calc(100vh - 200px);
     width: 100%;
 }
+
+@media(width < 720){
+    .mapConfig{
+        height: calc(100vh - 280px);
+    }
+}

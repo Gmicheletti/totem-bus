@@ -1,7 +1,7 @@
 import "./CardMap.css"
 import Map from "./Map"
 
-function CardMap({linha, progress, date, hour}){
+function CardMap({linha, previsao, progress, date, hour}){
     return(
         <div className="cardMap">
             <div className="headerMap">
@@ -29,7 +29,7 @@ function CardMap({linha, progress, date, hour}){
             <div className="footerMap">
                 <div className="time">
                     <h5>chegada em</h5>
-                    <h1>20 min</h1>
+                    <h1>{previsao}</h1>
                 </div>
                 <div className="currentDateTime">
                     <h1>{hour}</h1>
