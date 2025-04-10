@@ -1,5 +1,5 @@
-// const URL = '/api/siumobile-ws-v01/rest/ws/buscarPrevisoes/9847/0/retornoJSON'
-const URL = 'http://mobile-l.sitbus.com.br:6060/siumobile-ws-v01/rest/ws/buscarPrevisoes/9847/0/retornoJSON'
+const URL = '/api/siumobile-ws-v01/rest/ws/buscarPrevisoes/9847/0/retornoJSON'
+// const URL = 'http://mobile-l.sitbus.com.br:6060/siumobile-ws-v01/rest/ws/buscarPrevisoes/9847/0/retornoJSON'
 
 export async function getPrevisoes() {
   console.log('Executando getPrevisoes()')
@@ -10,7 +10,6 @@ export async function getPrevisoes() {
   if(responseHttp.ok) {
     // return await responseHttp.text()
 
-    const responseHttp = await fetch(URL)
     const text = await responseHttp.text()
 
     // Remove a função `retornoJSON(...)` e pega só o conteúdo
