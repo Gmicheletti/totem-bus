@@ -1,4 +1,5 @@
-const URL = '/api/siumobile-ws-v01/rest/ws/buscarPrevisoes/9847/0/retornoJSON'
+// const URL = '/api/siumobile-ws-v01/rest/ws/buscarPrevisoes/9847/0/retornoJSON'
+const URL = 'http://mobile-l.sitbus.com.br/siumobile-ws-v01/rest/ws/buscarPrevisoes/9847/0/retornoJSON'
 
 export async function getPrevisoes() {
   console.log('Executando getPrevisoes()')
