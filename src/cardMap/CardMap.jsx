@@ -1,7 +1,7 @@
 import "./CardMap.css"
 import Map from "./Map"
 
-function CardMap({linha, previsao, progress, date, hour}){
+function CardMap({linha, itinerario, previsao, progress, date, hour}){
     return(
         <div className="cardMap">
             <div className="headerMap">
@@ -9,7 +9,7 @@ function CardMap({linha, previsao, progress, date, hour}){
                 <h1>{linha}</h1>
             </div>
             <div className="map">
-                <Map></Map>
+                <Map itinerario={itinerario}></Map>
             </div>
             <div style={{
         height: '8px',

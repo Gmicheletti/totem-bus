@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import CardMap from "../cardMap/CardMap";
-import { getPrevisoes } from './AppAPI';
+import { getPrevisoes, getCoordIti } from './AppAPI';
 
 function App() {
   const [Linhas, setLinhas] = useState([]);
+  const [CoordIti, setCoordIti] = useState([]);
   const [indexBus, setIndexBus] = useState(0);
   const [progress, setProgress] = useState(0);
   const [CurrentBus, setCurrentBus] = useState(null);
@@ -12,13 +13,21 @@ function App() {
   const duration = 7000;
   const updateInterval = 100;
 
-  useEffect(() => {
-    async function fetchPrevisoes() {
-      const dados = await getPrevisoes();
-      setLinhas(dados.previsoes || []);
-    }
+  async function fetchPrevisoes() {
+    const dados = await getPrevisoes();
+    setLinhas(dados.previsoes || []);
+  }
 
+  async function fetchCoordIti() {
+    const dados = await getCoordIti(52756);
+    console.log(dados)
+    setCoordIti(dados.previsoes || []);
+  }
+
+
+  useEffect(() => {
     fetchPrevisoes();
+    fetchCoordIti();
   }, []);
 
   // Atualiza progress e troca o ônibus
@@ -62,7 +71,7 @@ function App() {
 
   return (
     <>
-      <CardMap linha={CurrentBus?.sgLin} previsao={CurrentBus?.prev} progress={progress} date={date} hour={hour} />
+      <CardMap linha={CurrentBus?.sgLin} itinerario={CurrentBus?.codItinerario} previsao={CurrentBus?.prev} progress={progress} date={date} hour={hour} />
     </>
   );
 }

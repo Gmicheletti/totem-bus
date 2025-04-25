@@ -1,22 +1,17 @@
-// const URL = '/api/siumobile-ws-v01/rest/ws/buscarPrevisoes/9847/0/retornoJSON'
-const URL = 'http://mobile-l.sitbus.com.br:6060/siumobile-ws-v01/rest/ws/buscarPrevisoes/9847/0/retornoJSON'
+const URL = '/api/siumobile-ws-v01/rest/ws/'
 
 export async function getPrevisoes() {
-  console.log('Executando getPrevisoes()')
 
-  const responseHttp = await fetch(URL)
-
+  const path_url = 'buscarPrevisoes/9847/0/retornoJSON'
+  const responseHttp = await fetch(URL + path_url)
 
   if(responseHttp.ok) {
-    // return await responseHttp.text()
 
     const text = await responseHttp.text()
 
     // Remove a função `retornoJSON(...)` e pega só o conteúdo
     const jsonMatch = text.match(/retornoJSON\((.*)\)/s)
-
     const json = JSON.parse(jsonMatch[1])
-
     return json
     
   } else {
@@ -25,3 +20,28 @@ export async function getPrevisoes() {
   }
 
 }
+
+
+export async function getCoordIti(itinerario) {
+  const path_url = `buscarItinerario/${itinerario}/0/retornoJSONItinerario`;
+  const responseHttp = await fetch(URL + path_url);
+
+  if (responseHttp.ok) {
+    const text = await responseHttp.text();
+
+    // Corrigido: usa o nome correto da função e extrai apenas o conteúdo
+    const jsonMatch = text.match(/retornoJSONItinerario\((.*)\)/s);
+    
+    if (jsonMatch && jsonMatch[1]) {
+      const json = JSON.parse(jsonMatch[1]);
+      return json;
+    } else {
+      throw new Error('Resposta inesperada do servidor');
+    }
+
+  } else {
+    console.log('Falha ao tentar buscar coordenadas do itinerário.');
+    throw new Error('Falha ao tentar buscar coordenadas do itinerário.');
+  }
+}
+

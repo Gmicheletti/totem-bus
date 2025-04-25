@@ -1,22 +1,51 @@
-// App.js
-import { MapContainer, TileLayer } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import "./Map.css"
 
+import { MapContainer, TileLayer, Polyline } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css'
+import { useEffect, useState } from 'react'
+import { getCoordIti } from '../app/AppAPI' // ajuste o caminho se necessário
 
-function Map() {
+function Map({itinerario}) {
+  const [coordenadas, setCoordenadas] = useState([])
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await getCoordIti(itinerario)
+        if (data.sucesso) {
+          const coords = data.itinerarios.map(p => [p.coordY, p.coordX])
+          setCoordenadas(coords)
+        }
+      } catch (err) {
+        console.error('Erro ao carregar itinerário:', err)
+      }
+    }
+
+    fetchData()
+  }, [itinerario])
+
+  if (coordenadas.length === 0) return <p>Carregando mapa...</p>
   const position = [-19.9062245,-43.9637809]; // Newton Paiva - Carlos Luz
 
   return (
-    <div className='mapConfig' style={{height:'calc(100vh - 200px)', width: '100%' }}>
-      <MapContainer center={position} zoom={40} style={{ height: '100%', width: '100%' }}>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
-        />
-      </MapContainer>
-    </div>
-  );
+
+    
+    <MapContainer
+      center={position}
+      zoom={15}
+      scrollWheelZoom={true}
+      style={{ height: '500px', width: '100%' }}
+    >
+      <TileLayer
+        attribution='&copy; OpenStreetMap'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <Polyline positions={coordenadas} color="blue" />
+    </MapContainer>
+  )
 }
 
 export default Map;
+
+
+
+
+
