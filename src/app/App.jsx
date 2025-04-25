@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import CardMap from "../cardMap/CardMap";
-import { getPrevisoes, getCoordIti } from './AppAPI';
+import { getPrevisoes } from './AppAPI';
 
 function App() {
   const [Linhas, setLinhas] = useState([]);
-  const [CoordIti, setCoordIti] = useState([]);
   const [indexBus, setIndexBus] = useState(0);
   const [progress, setProgress] = useState(0);
   const [CurrentBus, setCurrentBus] = useState(null);
@@ -18,16 +17,8 @@ function App() {
     setLinhas(dados.previsoes || []);
   }
 
-  async function fetchCoordIti() {
-    const dados = await getCoordIti(52756);
-    console.log(dados)
-    setCoordIti(dados.previsoes || []);
-  }
-
-
   useEffect(() => {
     fetchPrevisoes();
-    fetchCoordIti();
   }, []);
 
   // Atualiza progress e troca o ônibus

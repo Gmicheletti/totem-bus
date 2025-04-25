@@ -1,5 +1,5 @@
 import "./CardMap.css"
-import Map from "./Map"
+import Map from "../map/Map"
 
 function CardMap({linha, itinerario, previsao, progress, date, hour}){
     return(
