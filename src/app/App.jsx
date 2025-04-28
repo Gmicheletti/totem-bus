@@ -1,20 +1,36 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import CardMap from "../cardMap/CardMap";
+import CardPropaganda from "../cardPropaganda/CardPropaganda"
 import { getPrevisoes } from './AppAPI';
 
 function App() {
   const [Linhas, setLinhas] = useState([]);
   const [indexBus, setIndexBus] = useState(0);
-  const [progress, setProgress] = useState(0);
   const [CurrentBus, setCurrentBus] = useState(null);
+  const [progress, setProgress] = useState(0);
+  const [countPropaganda, setCountPropaganda] = useState(1)
 
   const duration = 7000;
   const updateInterval = 100;
 
   async function fetchPrevisoes() {
     const dados = await getPrevisoes();
-    setLinhas(dados.previsoes || []);
+
+    var list = []
+    const tamanhoLista = dados.previsoes.length
+
+    for(var i = 0; i < tamanhoLista; i++){
+      list.push(dados.previsoes[i])
+      list.push({
+        "codItinerario": 0,
+        "sgLin": "0"
+      })
+    }
+
+    
+    setLinhas(list || []);
+
   }
 
   useEffect(() => {
@@ -44,6 +60,15 @@ function App() {
   useEffect(() => {
     if (Linhas.length > 0) {
       setCurrentBus(Linhas[indexBus]);
+
+      if(CurrentBus?.codItinerario == 0){
+        setCountPropaganda(countPropaganda +1)
+      }
+
+      if(indexBus == 0){
+        setCountPropaganda(1)
+      }
+
     }
   }, [indexBus, Linhas]);
 
@@ -62,7 +87,19 @@ function App() {
 
   return (
     <>
-      <CardMap linha={CurrentBus?.sgLin} itinerario={CurrentBus?.codItinerario} previsao={CurrentBus?.prev} progress={progress} date={date} hour={hour} />
+    {CurrentBus?.codItinerario > 0 ? (
+      <CardMap 
+        linha={CurrentBus?.sgLin} 
+        itinerario={CurrentBus?.codItinerario} 
+        previsao={CurrentBus?.prev} 
+        progress={progress} 
+        date={date} 
+        hour={hour} 
+      />
+      
+    ) : (
+      <CardPropaganda count={countPropaganda} />
+    )}
     </>
   );
 }

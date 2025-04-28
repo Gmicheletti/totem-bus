@@ -35,7 +35,7 @@ function Map({ itinerario }) {
     }
 
     fetchCoordIti()
-    fetchVeiculos()
+    // fetchVeiculos()
 
     // Atualiza a cada 15s
     const interval = setInterval(fetchVeiculos, 15000)
