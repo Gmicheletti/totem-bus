@@ -1,8 +1,4 @@
-const URL =
-  import.meta.env.MODE === 'development'
-    ? '/api/siumobile-ws-v01/rest/ws/'
-    : 'http://mobile-l.sitbus.com.br:6060/siumobile-ws-v01/rest/ws/';
-
+const URL = '/api/siumobile-ws-v01/rest/ws/'
 
 export async function getPrevisoes() {
 
