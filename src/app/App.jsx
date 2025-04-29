@@ -65,7 +65,7 @@ function App() {
         setCountPropaganda(countPropaganda +1)
       }
 
-      if(indexBus == 0){
+      if(countPropaganda == 5){
         setCountPropaganda(1)
       }
 
@@ -98,7 +98,7 @@ function App() {
       />
       
     ) : (
-      <CardPropaganda count={countPropaganda} />
+      <CardPropaganda className='prop' count={countPropaganda} />
     )}
     </>
   );

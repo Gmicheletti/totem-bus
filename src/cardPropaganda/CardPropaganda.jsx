@@ -1,12 +1,12 @@
-import "./CardPropaganda.css"
+import "./CardPropaganda.css";
 
-function CardPropaganda({count}){
-
-    return(
+function CardPropaganda({ count }) {
+    const img_prop = `/assets/prop${count}.png`; // caminho direto da pasta public
+    return (
         <>
-            <h1>PROPAGANDA {count}</h1>   
+            <img src={img_prop} alt={`Propaganda ${count}`} />
         </>
-    )
+    );
 }
 
 export default CardPropaganda;

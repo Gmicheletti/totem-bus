@@ -1,10 +1,18 @@
 .cardMap{
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.cardStyle{
+    background-color: #21292D;
+    border: 2px solid #2a3036;
+    border-radius: 20px;
 }
 
 .headerMap{
     height: 80px;
-    background-color: #242424;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -12,7 +20,7 @@
 }
 
 .map{
-    height: calc(100vh - 200px);
+    height: auto;
 }
 
 .footerMap{
@@ -20,7 +28,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    background-color: #242424; 
 }
 
 .time, .currentDateTime{

@@ -8,8 +8,8 @@ function Map({ itinerario }) {
   const [coordenadas, setCoordenadas] = useState([])
   const [veiculos, setVeiculos] = useState([])
 
-  const position = [-19.9062245, -43.9637809] // Centro inicial
-
+  const position = [-19.904894, -43.958238] // Centro inicial
+  
   useEffect(() => {
     async function fetchCoordIti() {
       try {
@@ -47,10 +47,11 @@ function Map({ itinerario }) {
 
   return (
     <MapContainer
+      className="mapConfig"
       center={position}
-      zoom={13}
-      scrollWheelZoom={true}
-      style={{ height: '500px', width: '100%' }}
+      zoom={15}
+      scrollWheelZoom={false}
+      style={{ height: '500px', width: '100%', borderRadius: '20px'}}
     >
       <TileLayer
         attribution='&copy; OpenStreetMap'
