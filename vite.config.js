@@ -14,6 +14,7 @@ export default defineConfig({
       '/api': {
         target: 'http://mobile-l.sitbus.com.br:6060',
         changeOrigin: true,
+        secure: false,
         rewrite: path => path.replace(/^\/api/, '')
       }
     }
