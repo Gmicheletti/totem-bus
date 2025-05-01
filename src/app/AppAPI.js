@@ -1,4 +1,4 @@
-const URL = 'https://api-totem-bus.onrender.com/'
+const URL = '/api/'
 
 export async function getPrevisoes() {
 
