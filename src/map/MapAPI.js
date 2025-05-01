@@ -1,8 +1,8 @@
-const URL = '/api/siumobile-ws-v01/rest/ws/'
+const URL = 'https://api-totem-bus.onrender.com/'
 
 
 export async function getCoordIti(itinerario) {
-    const path_url = `buscarItinerario/${itinerario}/0/retornoJSONItinerario`;
+    const path_url = `buscarItinerario/${itinerario}`;
     const responseHttp = await fetch(URL + path_url);
   
     if (responseHttp.ok) {
@@ -26,7 +26,7 @@ export async function getCoordIti(itinerario) {
   
 
   export async function getVeiculos(itinerario) {
-    const path_url = `retornaVeiculosMapa/${itinerario}/0/retornoJSONVeiculos`
+    const path_url = `retornaVeiculosMapa/${itinerario}`
     const responseHttp = await fetch(URL + path_url)
   
     if (responseHttp.ok) {

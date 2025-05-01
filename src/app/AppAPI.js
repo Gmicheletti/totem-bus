@@ -1,8 +1,8 @@
-const URL = '/api/siumobile-ws-v01/rest/ws/'
+const URL = 'https://api-totem-bus.onrender.com/'
 
 export async function getPrevisoes() {
 
-  const path_url = 'buscarPrevisoes/9847/0/retornoJSON'
+  const path_url = 'buscarPrevisoes/9847'
   const responseHttp = await fetch(URL + path_url)
 
   if(responseHttp.ok) {
