@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+import { useState, useEffect } from "react";
+import "./App.css";
 import CardMap from "../cardMap/CardMap";
-import CardPropaganda from "../cardPropaganda/CardPropaganda"
-import { getPrevisoes } from './AppAPI';
+import CardPropaganda from "../cardPropaganda/CardPropaganda";
+import { getPrevisoes } from "./AppAPI";
 
 function App() {
   const [Linhas, setLinhas] = useState([]);
   const [indexBus, setIndexBus] = useState(0);
   const [CurrentBus, setCurrentBus] = useState(null);
   const [progress, setProgress] = useState(0);
-  const [countPropaganda, setCountPropaganda] = useState(1)
+  const [countPropaganda, setCountPropaganda] = useState(1);
 
   const duration = 7000;
   const updateInterval = 100;
@@ -17,20 +17,18 @@ function App() {
   async function fetchPrevisoes() {
     const dados = await getPrevisoes();
 
-    var list = []
-    const tamanhoLista = dados.previsoes.length
+    var list = [];
+    const tamanhoLista = dados.previsoes.length;
 
-    for(var i = 0; i < tamanhoLista; i++){
-      list.push(dados.previsoes[i])
+    for (var i = 0; i < tamanhoLista; i++) {
+      list.push(dados.previsoes[i]);
       list.push({
-        "codItinerario": 0,
-        "sgLin": "0"
-      })
+        codItinerario: 0,
+        sgLin: "0",
+      });
     }
 
-    
     setLinhas(list || []);
-
   }
 
   useEffect(() => {
@@ -47,7 +45,7 @@ function App() {
       setProgress((currentStep / totalSteps) * 100);
 
       if (currentStep >= totalSteps) {
-        setIndexBus(prev => (prev + 1) % Linhas.length);
+        setIndexBus((prev) => (prev + 1) % Linhas.length);
         currentStep = 0;
         setProgress(0);
       }
@@ -61,14 +59,13 @@ function App() {
     if (Linhas.length > 0) {
       setCurrentBus(Linhas[indexBus]);
 
-      if(CurrentBus?.codItinerario == 0){
-        setCountPropaganda(countPropaganda +1)
+      if (CurrentBus?.codItinerario == 0) {
+        setCountPropaganda(countPropaganda + 1);
       }
 
-      if(countPropaganda == 5){
-        setCountPropaganda(1)
+      if (countPropaganda == 5) {
+        setCountPropaganda(1);
       }
-
     }
   }, [indexBus, Linhas]);
 
@@ -85,21 +82,25 @@ function App() {
   const date = dataHora.toLocaleDateString();
   const hour = dataHora.toLocaleTimeString();
 
+
+
   return (
     <>
-    {CurrentBus?.codItinerario > 0 ? (
-      <CardMap 
-        linha={CurrentBus?.sgLin} 
-        itinerario={CurrentBus?.codItinerario} 
-        previsao={CurrentBus?.prev} 
-        progress={progress} 
-        date={date} 
-        hour={hour} 
-      />
-      
-    ) : (
-      <CardPropaganda className='prop' count={countPropaganda} />
-    )}
+      {CurrentBus?.codItinerario > 0 ? (
+        <CardMap
+          linha={CurrentBus?.sgLin}
+          itinerario={CurrentBus?.codItinerario}
+          previsao={CurrentBus?.prev}
+          progress={progress}
+          date={date}
+          hour={hour}
+        />
+      ) : (
+        <CardPropaganda
+          className="prop"
+          count={countPropaganda}
+        />
+      )}
     </>
   );
 }

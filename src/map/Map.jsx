@@ -43,7 +43,13 @@ function Map({ itinerario }) {
 
   }, [itinerario])
 
-  if (coordenadas.length === 0) return <p>Carregando mapa...</p>
+  if (coordenadas.length === 0) return     <MapContainer
+  className="mapConfig"
+  center={position}
+  zoom={15}
+  scrollWheelZoom={false}
+  style={{ height: '500px', width: '100%', borderRadius: '20px'}}
+></MapContainer>
 
   return (
     <MapContainer
