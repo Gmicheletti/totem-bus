@@ -2,7 +2,7 @@ const URL = '/api/'
 
 export async function getPrevisoes() {
 
-  const path_url = 'buscarPrevisoes/9847'
+  const path_url = 'prevParada/9847'
   const responseHttp = await fetch(URL + path_url)
 
   if(responseHttp.ok) {

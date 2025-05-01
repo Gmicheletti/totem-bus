@@ -2,7 +2,7 @@ const URL = '/api/'
 
 
 export async function getCoordIti(itinerario) {
-    const path_url = `buscarItinerario/${itinerario}`;
+    const path_url = `coordIti/${itinerario}`;
     const responseHttp = await fetch(URL + path_url);
   
     if (responseHttp.ok) {
@@ -26,7 +26,7 @@ export async function getCoordIti(itinerario) {
   
 
   export async function getVeiculos(itinerario) {
-    const path_url = `retornaVeiculosMapa/${itinerario}`
+    const path_url = `coordVei/${itinerario}`
     const responseHttp = await fetch(URL + path_url)
   
     if (responseHttp.ok) {
