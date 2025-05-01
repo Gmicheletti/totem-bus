@@ -1,5 +1,4 @@
-const URL = '/api/'
-
+const URL = '/api/';
 
 export async function getCoordIti(itinerario) {
     const path_url = `coordIti/${itinerario}`;

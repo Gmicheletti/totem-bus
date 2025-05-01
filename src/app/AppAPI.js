@@ -1,4 +1,4 @@
-const URL = '/api/'
+const URL = '/api/';
 
 export async function getPrevisoes() {
 
