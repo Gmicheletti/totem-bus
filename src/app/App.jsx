@@ -82,7 +82,7 @@ function App() {
   const date = dataHora.toLocaleDateString();
   const hour = dataHora.toLocaleTimeString();
 
-
+  
 
   return (
     <>
