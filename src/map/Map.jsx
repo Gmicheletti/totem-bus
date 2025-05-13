@@ -71,7 +71,7 @@ function Map({ itinerario }) {
           key={idx}
           position={[v.lat, v.long]}
           icon={L.icon({
-            iconUrl: '/assets/bus-icon.png', // substitua por um ícone customizado
+            iconUrl: '/public/assets/bus-icon.png', // substitua por um ícone customizado
             iconSize: [25, 25]
           })}
         >
