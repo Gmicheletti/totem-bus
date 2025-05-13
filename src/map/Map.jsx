@@ -67,7 +67,7 @@ function Map({ itinerario }) {
       <Polyline positions={coordenadas} color="blue" />
       
       <Marker
-        position={[-19.9064082, -43.9647295]}
+        position={[-19.90605425969247, -43.9638653695289]}
         icon={L.icon({
         iconUrl: '/assets/bus-stop.png',
         iconSize: [25, 25],
