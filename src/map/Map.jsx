@@ -67,13 +67,13 @@ function Map({ itinerario }) {
       <Polyline positions={coordenadas} color="blue" />
       
       <Marker
-        position= {[-19.9064082, -43.9647295]}
+        position={[-19.9064082, -43.9647295]}
         icon={L.icon({
-            iconUrl: '/assets/bus-stop.png', // substitua por um ícone customizado
-            iconSize: [25, 25],
-            iconAnchor: [25, 25]      
-        >
-
+        iconUrl: '/assets/bus-stop.png',
+        iconSize: [25, 25],
+        iconAnchor: [12, 12] // ajuste o ponto de ancoragem ao centro do ícone
+        })}>
+        <Popup>Parada de ônibus</Popup>
       </Marker>
 
       {veiculos.map((v, idx) => (
