@@ -70,7 +70,7 @@ function Map({ itinerario }) {
         position={[-19.90605425969247, -43.9638653695289]}
         icon={L.icon({
         iconUrl: '/assets/bus-stop.png',
-        iconSize: [25, 25],
+        iconSize: [45, 45],
         iconAnchor: [12, 12] // ajuste o ponto de ancoragem ao centro do ícone
         })}>
         <Popup>Parada de ônibus</Popup>
