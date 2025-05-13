@@ -22,10 +22,10 @@ function App() {
 
     for (var i = 0; i < tamanhoLista; i++) {
       list.push(dados.previsoes[i]);
-      list.push({
-        codItinerario: 0,
-        sgLin: "0",
-      });
+      // list.push({
+      //   codItinerario: 0,
+      //   sgLin: "0",
+      // });
     }
 
     setLinhas(list || []);
