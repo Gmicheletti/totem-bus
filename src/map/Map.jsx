@@ -25,7 +25,7 @@ function Map({ itinerario }) {
 
     async function fetchVeiculos() {
       try {
-        const dados = await getVeiculos()
+        const dados = await getVeiculos(itinerario)
         if (dados.sucesso) {
           setVeiculos(dados.veiculos)
         }
