@@ -35,7 +35,7 @@ function Map({ itinerario }) {
     }
 
     fetchCoordIti()
-    // fetchVeiculos()
+    fetchVeiculos()
 
     // Atualiza a cada 15s
     const interval = setInterval(fetchVeiculos, 15000)
@@ -71,7 +71,7 @@ function Map({ itinerario }) {
           key={idx}
           position={[v.lat, v.long]}
           icon={L.icon({
-            iconUrl: '/public/assets/bus-icon.png', // substitua por um ícone customizado
+            iconUrl: '/assets/bus-icon.png', // substitua por um ícone customizado
             iconSize: [25, 25]
           })}
         >
