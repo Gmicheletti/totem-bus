@@ -11,7 +11,7 @@
 
 ## 🚀 Demonstração
 
-Acesse a aplicação em: [https://totembus.console.log.br](totembus.console.log.br)
+Acesse a aplicação em: https://totembus.console.log.br
 
 ## 🛠️ Tecnologias Utilizadas
 
