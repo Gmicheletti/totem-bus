@@ -7,7 +7,7 @@ export async function getCoordIti(itinerario) {
     if (responseHttp.ok) {
       const text = await responseHttp.text();
   
-      // Corrigido: usa o nome correto da função e extrai apenas o conteúdo
+      // Corrigido: usa o nome correto da função e extrai apenas o conteúdo.
       const jsonMatch = text.match(/retornoJSONItinerario\((.*)\)/s);
       
       if (jsonMatch && jsonMatch[1]) {
