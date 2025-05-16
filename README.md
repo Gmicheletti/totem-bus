@@ -29,17 +29,4 @@ Acesse a aplicação em: [https://totembus.console.log.br](totembus.console.log.
 
 - Para rodar o projeto, iniciar no vscode o comando: npm run dev
 
-## 📁 Estrutura do Projeto
-- totem-bus/
-├── public/
-│   └── assets/           # Ícones e imagens utilizadas no mapa
-├── src/
-│   ├── components/       # Componentes React reutilizáveis
-│   ├── services/         # Serviços para chamadas de API
-│   ├── App.jsx           # Componente principal da aplicação
-│   └── main.jsx          # Ponto de entrada da aplicação
-├── package.json          # Dependências e scripts do projeto
-├── vite.config.js        # Configurações do Vite
-└── README.md             # Documentação do projeto
-
 
