@@ -1,10 +1,4 @@
 .mapConfig{
-    height: calc(100vh - 200px);
+    height: calc(100vh - 20px);
     width: 100%;
-}
-
-@media(width < 720){
-    .mapConfig{
-        height: calc(100vh - 280px);
-    }
 }

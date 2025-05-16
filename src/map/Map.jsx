@@ -52,7 +52,7 @@ function Map({ itinerario, numVeicGestor }) {
     fetchVeiculos();
 
     // Atualiza a cada 30s
-    const interval = setInterval(fetchVeiculos, 15000);
+    const interval = setInterval(fetchVeiculos, 2000);
     return () => clearInterval(interval);
   }, [itinerario]);
 
@@ -81,9 +81,9 @@ function Map({ itinerario, numVeicGestor }) {
     <MapContainer
       className="mapConfig"
       center={pointA}
-      zoom={15}
+      zoom={13}
       scrollWheelZoom={false}
-      style={{ height: "500px", width: "100%", borderRadius: "20px" }}
+      style={{ height: "100%", width: "100%", borderRadius: "20px" }}
     >
       <TileLayer
         attribution="&copy; OpenStreetMap"
@@ -96,7 +96,7 @@ function Map({ itinerario, numVeicGestor }) {
         position={pointA}
         icon={L.icon({
           iconUrl: "/assets/bus-stop.png",
-          iconSize: [45, 45],
+          iconSize: [65, 65],
           iconAnchor: [12, 12], // ajuste o ponto de ancoragem ao centro do ícone
         })}
       >
@@ -109,7 +109,7 @@ function Map({ itinerario, numVeicGestor }) {
           position={[veiculos.lat, veiculos.long]}
           icon={L.icon({
             iconUrl: "/assets/bus-icon.png",
-            iconSize: [25, 25],
+            iconSize: [45, 45],
           })}
         >
           <Popup>Veículo: {veiculos.descricao}</Popup>

@@ -11,10 +11,9 @@ function App() {
   const [progress, setProgress] = useState(0);
   const [countPropaganda, setCountPropaganda] = useState(1);
 
-  const duration = 15000;
-  const updateInterval = 100;
+  const updateInterval = 100; //intervalo de atualizao da barra
 
-//--------------------------------------------
+  //--------------------------------------------
   //Busca as linhas que passam no ponto de onibus escolhido
   async function fetchPrevisoes() {
     const dados = await getPrevisoes();
@@ -27,7 +26,6 @@ function App() {
 
       // Pega somente os onibus que tem a previsao de chegada menor ou igual a 20 minutos
       if (minutos <= 20) {
-
         // Adiciona linha na lista
         list.push(dados.previsoes[i]);
 
@@ -46,12 +44,17 @@ function App() {
   useEffect(() => {
     fetchPrevisoes();
   }, []);
-//--------------------------------------------
+  //--------------------------------------------
 
-//--------------------------------------------
+  //--------------------------------------------
   // Atualiza progress e troca o ônibus
   useEffect(() => {
-    const totalSteps = duration / updateInterval;
+    if (Linhas.length === 0) return;
+
+    const isAd = Linhas[indexBus]?.codItinerario === 0; // verifica se item atual é uma linha ou anuncio
+    const dynamicDuration = isAd ? 3000 : 15000; // 5s para propaganda, 15s para ônibus
+    console.log(dynamicDuration);
+    const totalSteps = dynamicDuration / updateInterval;
     let currentStep = 0;
 
     const interval = setInterval(() => {
@@ -66,10 +69,10 @@ function App() {
     }, updateInterval);
 
     return () => clearInterval(interval);
-  }, [Linhas]);
-//--------------------------------------------
+  }, [Linhas, indexBus]);
+  //--------------------------------------------
 
-//--------------------------------------------
+  //--------------------------------------------
   // Atualiza CurrentBus toda vez que indexBus muda
   useEffect(() => {
     if (Linhas.length > 0) {
@@ -84,8 +87,7 @@ function App() {
       }
     }
   }, [indexBus, Linhas]);
-//--------------------------------------------
-
+  //--------------------------------------------
 
   //-----------------RELOGIO--------------------
   const [dataHora, setDataHora] = useState(new Date());
@@ -99,7 +101,7 @@ function App() {
 
   const date = dataHora.toLocaleDateString();
   const hour = dataHora.toLocaleTimeString();
-//--------------------------------------------
+  //--------------------------------------------
   return (
     <>
       {CurrentBus?.codItinerario > 0 ? (
