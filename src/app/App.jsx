@@ -11,9 +11,11 @@ function App() {
   const [progress, setProgress] = useState(0);
   const [countPropaganda, setCountPropaganda] = useState(1);
 
-  const duration = 7000;
+  const duration = 15000;
   const updateInterval = 100;
 
+//--------------------------------------------
+  //Busca as linhas que passam no ponto de onibus escolhido
   async function fetchPrevisoes() {
     const dados = await getPrevisoes();
 
@@ -21,11 +23,21 @@ function App() {
     const tamanhoLista = dados.previsoes.length;
 
     for (var i = 0; i < tamanhoLista; i++) {
-      list.push(dados.previsoes[i]);
-      // list.push({
-      //   codItinerario: 0,
-      //   sgLin: "0",
-      // });
+      let minutos = parseInt(dados.previsoes[i].prev.split(" ")[0]);
+
+      // Pega somente os onibus que tem a previsao de chegada menor ou igual a 20 minutos
+      if (minutos <= 20) {
+
+        // Adiciona linha na lista
+        list.push(dados.previsoes[i]);
+
+        // O codItinerario 0 é utilizado para identificar que é um anúncio
+        // Para cada linha, um anúncio é intercalado
+        list.push({
+          codItinerario: 0,
+          sgLin: "0",
+        });
+      }
     }
 
     setLinhas(list || []);
@@ -34,7 +46,9 @@ function App() {
   useEffect(() => {
     fetchPrevisoes();
   }, []);
+//--------------------------------------------
 
+//--------------------------------------------
   // Atualiza progress e troca o ônibus
   useEffect(() => {
     const totalSteps = duration / updateInterval;
@@ -53,7 +67,9 @@ function App() {
 
     return () => clearInterval(interval);
   }, [Linhas]);
+//--------------------------------------------
 
+//--------------------------------------------
   // Atualiza CurrentBus toda vez que indexBus muda
   useEffect(() => {
     if (Linhas.length > 0) {
@@ -68,8 +84,10 @@ function App() {
       }
     }
   }, [indexBus, Linhas]);
+//--------------------------------------------
 
-  // Relógio
+
+  //-----------------RELOGIO--------------------
   const [dataHora, setDataHora] = useState(new Date());
 
   useEffect(() => {
@@ -81,9 +99,7 @@ function App() {
 
   const date = dataHora.toLocaleDateString();
   const hour = dataHora.toLocaleTimeString();
-
-  
-
+//--------------------------------------------
   return (
     <>
       {CurrentBus?.codItinerario > 0 ? (
@@ -94,12 +110,10 @@ function App() {
           progress={progress}
           date={date}
           hour={hour}
+          numVeicGestor={CurrentBus?.numVeicGestor}
         />
       ) : (
-        <CardPropaganda
-          className="prop"
-          count={countPropaganda}
-        />
+        <CardPropaganda className="prop" count={countPropaganda} />
       )}
     </>
   );

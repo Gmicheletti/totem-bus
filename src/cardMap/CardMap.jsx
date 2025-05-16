@@ -1,7 +1,9 @@
 import "./CardMap.css";
 import Map from "../map/Map";
 
-function CardMap({ linha, itinerario, previsao, progress, date, hour }) {
+//--------------------------------------------
+//recebe e passa os parametros das linhas para dentro do componente Map
+function CardMap({ linha, itinerario, previsao, progress, date, hour, numVeicGestor }) {
   return (
     <div className="cardMap">
       <div className="headerMap cardStyle">
@@ -9,7 +11,7 @@ function CardMap({ linha, itinerario, previsao, progress, date, hour }) {
         <h5>{date}</h5>
       </div>
       <div className="map">
-        <Map itinerario={itinerario}></Map>
+        <Map itinerario={itinerario} numVeicGestor={numVeicGestor}></Map>
       </div>
 
       <div className="footerMap cardStyle">
