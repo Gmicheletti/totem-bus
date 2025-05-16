@@ -30,13 +30,12 @@ function Map({ itinerario, numVeicGestor }) {
       }
     }
 
-//--------------------------------------------
-// Busca as posicoes dos onibus dentro do itinerario (caminho que o onibus faz)
+    //--------------------------------------------
+    // Busca as posicoes dos onibus dentro do itinerario (caminho que o onibus faz)
     async function fetchVeiculos() {
       try {
         const dados = await getVeiculos(itinerario);
         if (dados.sucesso) {
-
           // Busca o onibus que queremos dentro da lista de onibus da mesma linha que esta no mesmo itinerario
           const veiculoEncontrado = dados.veiculos.find(
             (veiculo) => veiculo.numVeicGestor === numVeicGestor
@@ -71,7 +70,8 @@ function Map({ itinerario, numVeicGestor }) {
   }
 
   const pointA = [-19.90605425969247, -43.9638653695289]; // Ponto de onibus da Newton
-  const pointB = veiculos.lat !== undefined && veiculos.long !== undefined
+  const pointB =
+    veiculos.lat !== undefined && veiculos.long !== undefined
       ? [veiculos.lat, veiculos.long]
       : null;
 
@@ -87,10 +87,10 @@ function Map({ itinerario, numVeicGestor }) {
     >
       <TileLayer
         attribution="&copy; OpenStreetMap"
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
       />
 
-      <Polyline positions={coordenadas} color="blue" />
+      <Polyline positions={coordenadas} color="#21292D" />
 
       <Marker
         position={pointA}
@@ -110,6 +110,7 @@ function Map({ itinerario, numVeicGestor }) {
           icon={L.icon({
             iconUrl: "/assets/bus-icon.png",
             iconSize: [45, 45],
+            iconAnchor: [12, 12], // ajuste o ponto de ancoragem ao centro do ícone
           })}
         >
           <Popup>Veículo: {veiculos.descricao}</Popup>

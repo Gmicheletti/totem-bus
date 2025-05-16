@@ -31,10 +31,12 @@ function App() {
 
         // O codItinerario 0 é utilizado para identificar que é um anúncio
         // Para cada linha, um anúncio é intercalado
+
         list.push({
           codItinerario: 0,
           sgLin: "0",
         });
+
       }
     }
 
