@@ -17,15 +17,18 @@ function App() {
   //Busca as linhas que passam no ponto de onibus escolhido
   async function fetchPrevisoes() {
     const dados = await getPrevisoes();
+    console.log(dados)
 
     var list = [];
     const tamanhoLista = dados.previsoes.length;
 
     for (var i = 0; i < tamanhoLista; i++) {
+      
       let minutos = parseInt(dados.previsoes[i].prev.split(" ")[0]);
 
       // Pega somente os onibus que tem a previsao de chegada menor ou igual a 20 minutos
-      if (minutos <= 20) {
+      //if (minutos <= 50) {
+
         // Adiciona linha na lista
         list.push(dados.previsoes[i]);
 
@@ -37,7 +40,7 @@ function App() {
           sgLin: "0",
         });
 
-      }
+      //}
     }
 
     setLinhas(list || []);
@@ -55,7 +58,7 @@ function App() {
 
     const isAd = Linhas[indexBus]?.codItinerario === 0; // verifica se item atual é uma linha ou anuncio
     const dynamicDuration = isAd ? 3000 : 15000; // 5s para propaganda, 15s para ônibus
-    console.log(dynamicDuration);
+
     const totalSteps = dynamicDuration / updateInterval;
     let currentStep = 0;
 
