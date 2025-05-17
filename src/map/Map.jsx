@@ -36,15 +36,13 @@ function Map({ itinerario, numVeicGestor }) {
       try {
         const dados = await getVeiculos(itinerario);
         if (dados.sucesso) {
-          if (veiculoEncontrado.numVeicGestor > 0) {
-            // Busca o onibus que queremos dentro da lista de onibus da mesma linha que esta no mesmo itinerario
-            const veiculoEncontrado = dados.veiculos.find(
-              (veiculo) => veiculo.numVeicGestor === numVeicGestor
-            );
-            setVeiculos(veiculoEncontrado);
-          } else {
-            setVeiculos(dados.veiculos[0]);
-          }
+          // Busca o onibus que queremos dentro da lista de onibus da mesma linha que esta no mesmo itinerario
+          const veiculoEncontrado = dados.veiculos.find(
+            (veiculo) => veiculo.numVeicGestor === numVeicGestor
+          );
+          // setVeiculos(dados.veiculos[0]);
+          setVeiculos(veiculoEncontrado);
+
         }
       } catch (err) {
         console.error("Erro ao carregar veículos:", err);
@@ -85,7 +83,7 @@ function Map({ itinerario, numVeicGestor }) {
     <MapContainer
       className="mapConfig"
       center={pointA}
-      zoom={13}
+      zoom={12}
       scrollWheelZoom={false}
       style={{ height: "100%", width: "100%", borderRadius: "20px" }}
     >
@@ -120,6 +118,7 @@ function Map({ itinerario, numVeicGestor }) {
           <Popup>Veículo: {veiculos.descricao}</Popup>
         </Marker>
       )}
+      
 
       {bounds && <FitBounds bounds={bounds} />}
     </MapContainer>

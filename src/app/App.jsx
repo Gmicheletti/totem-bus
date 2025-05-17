@@ -27,7 +27,7 @@ function App() {
       let minutos = parseInt(dados.previsoes[i].prev.split(" ")[0]);
 
       // Pega somente os onibus que tem a previsao de chegada menor ou igual a 20 minutos
-      if (minutos <= 50) {
+      if (minutos <= 20) {
 
         // Adiciona linha na lista
         list.push(dados.previsoes[i]);
@@ -70,6 +70,7 @@ function App() {
         setIndexBus((prev) => (prev + 1) % Linhas.length);
         currentStep = 0;
         setProgress(0);
+        fetchPrevisoes();
       }
     }, updateInterval);
 
